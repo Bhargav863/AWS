@@ -11,6 +11,14 @@
    1) Root user = Having Full permissions
    2) IAM user = Having Limited permissions
 
-**USERS**
+## USERS
 ---------
-
+* An IAM user is an entity that you create in your AWS account. The IAM user represents the human user or workload who uses the IAM user to interact with AWS resources. An IAM user consists of a name and credentials.
+* For IAM users, we can anytime attach and detach the permissions/policies.
+* You can share the root account access/admin access by creating IAM user.
+* MFA is highly recommended for both root account and IAM account.
+* There are 2 ways to access the AWS account
+   | AWS console access      | Programmatic Access   |
+   --------------------------|------------------------
+   | Login using username/password | Login using Access keys and secret keys |
+   
