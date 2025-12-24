@@ -73,3 +73,7 @@
    | Without Tags      | With Tags   |
    --------------------|--------------
    | manually go through 500 users and delete all Developers | With tags, we can write a python script to delete all users key=Team, value=Developers and run it using lambda |
+* Tags are used for automation purpose and cost optimization purpose.
+* Maximum of 50 tags you can give for a resource.
+* Tags are optional, but it is a best practice to use tags.
+
