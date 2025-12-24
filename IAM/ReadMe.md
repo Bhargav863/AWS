@@ -33,7 +33,7 @@
 
 ## GROUPS  
 * An IAM Group is a collection of IAM users. IAM Groups are used to assign the policies to the bunch of users at the same time.
-* I have multiple users in my AWS account with different permissions like below
+* I have multiple users in my AWS account with different permissions like below.
       1) Bhargav --> EC2
       2) Srinu --> Lambda
       3) Sunil --> S3
