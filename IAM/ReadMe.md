@@ -77,3 +77,24 @@
 * Maximum of 50 tags you can give for a resource.
 * Tags are optional, but it is a best practice to use tags.
 
+### Access Advisor
+* IAM access advisor shows which services that IAM users, Groups and Roles can access and when they are last accessed.
+* It is used to revise your policies to the users.
+
+## AWS organisations
+* AWS Organizations is a service that lets you centrally manage multiple AWS accounts under a single organization.
+* As company grows using one big account will be risky
+   - No isolation between teams.
+   - Difficult cost tracking
+   - No centralized management.
+* Organizations will help us to manage differnet root accounts for different teams.
+     - company root account = Management Account (Controls organization)
+     - Different teams root account = Member account( Control their own team account and resources)
+* You can control access to these member account using SCP(service control policies).
+* At the end, management account will get the bill.
+* organizations handles multiple root accounts.
+
+## IAM Access analyzer
+* IAM Access Analyzer helps you identify the resources in your organization and accounts, such as Amazon S3 buckets or IAM roles, shared with an external entity. This lets you identify unintended access to your resources and data, which is a security risk.
+* Based on finding it will take action.
+
