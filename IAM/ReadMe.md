@@ -34,9 +34,9 @@
 ## GROUPS  
 * An IAM Group is a collection of IAM users. IAM Groups are used to assign the policies to the bunch of users at the same time.
 * I have multiple users in my AWS account with different permissions like below
-      - Bhargav --> EC2
-      - Srinu --> Lambda
-      - Sunil --> S3
+      1) Bhargav --> EC2
+      2) Srinu --> Lambda
+      3) Sunil --> S3
 * I need to give R53 permissions to all my users. Then I will create a Group and attach a policy with required R53 permissions and will add the users to the Group.
 * Then every user in that group will get the R53 permissions along with their own permissions.
 * One user can be in Multiple Groups.
