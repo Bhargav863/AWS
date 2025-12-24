@@ -77,7 +77,7 @@
 * Maximum of 50 tags you can give for a resource.
 * Tags are optional, but it is a best practice to use tags.
 
-### Access Advisor
+## Access Advisor
 * IAM access advisor shows which services that IAM users, Groups and Roles can access and when they are last accessed.
 * It is used to revise your policies to the users.
 
