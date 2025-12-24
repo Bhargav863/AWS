@@ -1,3 +1,4 @@
+# IAM (Identity and Access Management)
 * AWS IAM (Identity and Access Management) is a webservice that helps you to securely control the access to the entire AWS resources centrally.
 * IAM is used for security Purposes.
 * You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources.
@@ -12,7 +13,6 @@
    2) IAM user = Having Limited permissions
 
 ## USERS
----------
 * An IAM user is an entity that you create in your AWS account. The IAM user represents the human user or workload who uses the IAM user to interact with AWS resources. An IAM user consists of a name and credentials.
 * For IAM users, we can anytime attach and detach the permissions/policies.
 * You can share the root account access/admin access by creating IAM user.
@@ -21,4 +21,35 @@
    | AWS console access      | Programmatic Access   |
    --------------------------|------------------------
    | Login using username/password | Login using Access keys and secret keys |
-   
+* For every user, console access and private access comeup with same access/permissions.
+* Keys are user specific. Individual users can have their own keys.
+* You can create maximum 2 keys for an IAM user.
+* Create the keys based on the requirement, don't create it unnecessarily.
+* It is not recommended to share the keys to others.
+* Once you lost the keys, you cannot get it back. But you can regenrate it for N number of times.
+* secret key only visible for one time.
+* It is not recommended to create keys for Root account.
+* Brand new IAM user will not have any permissions/policies attached by default.
+
+## GROUPS  
+* An IAM Group is a collection of IAM users. IAM Groups are used to assign the policies to the bunch of users at the same time.
+* I have multiple users in my AWS account with different permissions like below
+      - Bhargav --> EC2
+      - Srinu --> Lambda
+      - Sunil --> S3
+* I need to give R53 permissions to all my users. Then I will create a Group and attach a policy with required R53 permissions and will add the users to the Group.
+* Then every user in that group will get the R53 permissions along with their own permissions.
+* One user can be in Multiple Groups.
+* Maximum you can attach 10 policies to a Group/user/Role.
+* It is not possible to create nested groups i.e Group under group
+* If you attach any IAM users to the IAM Groups, IAM user individual policies remains same and the new permissions will be inherited from the Group.
+* You cannot assign/create keys for a Group.
+*An IAM user can be attached to the multiple Groups at the same time.
+
+## Policies
+* Policies are the json documents which contains the permissions.
+* Policies are written in Json Format.
+* There are two types of policies
+  - Managed Policy :- Created and managed by AWS.(Predefined Policies)
+  - Inline Policy :- Created and Managed by Customers.(Customer managed policy/custom policy).
+* Using Policy generator/visual Editor, Json code is generated automatically.
