@@ -53,3 +53,11 @@
   - Managed Policy :- Created and managed by AWS.(Predefined Policies)
   - Inline Policy :- Created and Managed by Customers.(Customer managed policy/custom policy).
 * Using Policy generator/visual Editor, Json code is generated automatically.
+
+## Roles
+* Roles provide temporary access to the aws resources without credentials.
+* For example, I have an EC2 instance with Linux OS and AWS CLI installed, You will authenticate to AWS using access key and secret keys. But these keys will be stored locally in EC2 instance which is a security risk.(It might be hacked)
+* If you use the roles, we no need to configure the keys on EC2 instance.
+* Based on the permissions you attached to the role, those permissions are available to the EC2 instance.
+* 1 EC2 instance have only one role attached.
+* One role can be attached to multiple AWS resources/Multiple EC2 instances.
