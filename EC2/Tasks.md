@@ -119,7 +119,6 @@ This repository contains **step-by-step lab tasks** to practice **AWS EC2, AMI, 
 
 - [ ] Launch 2 EC2 instances with **user data**
       
-      ```bash
       #!/bin/bash
       mkdir /data
       echo "AWS AMI LAB" > /data/info.txt
