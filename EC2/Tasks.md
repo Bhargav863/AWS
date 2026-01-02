@@ -118,6 +118,7 @@ This repository contains **step-by-step lab tasks** to practice **AWS EC2, AMI, 
 ## Load Balancer (ELB) Tasks
 
 - [ ] Launch 2 EC2 instances with **user data**
+      
       ```
       #!/bin/bash
       mkdir /data
