@@ -1,10 +1,11 @@
-# AWS EC2, AMI, Volumes & Load Balancer Lab 🖥️☁️
+# AWS EC2, AMI, Volumes, Load Balancer & Auto Scaling Lab 🖥️☁️
 
 [![AWS](https://img.shields.io/badge/AWS-EC2-blue?logo=amazon-aws)](https://aws.amazon.com/ec2/)
 [![Linux](https://img.shields.io/badge/Linux-red?logo=linux)](https://www.linux.org/)
 [![ELB](https://img.shields.io/badge/Load_Balancer-green)](https://aws.amazon.com/elasticloadbalancing/)
+[![AutoScaling](https://img.shields.io/badge/AutoScaling-yellowgreen)](https://aws.amazon.com/autoscaling/)
 
-This repository contains **step-by-step lab tasks** to practice **AWS EC2, AMI, EBS Volumes, and Load Balancers**.
+This repository contains **step-by-step lab tasks** to practice **AWS EC2, AMI, EBS Volumes, Load Balancers, and Auto Scaling**.
 
 ---
 
@@ -14,6 +15,7 @@ This repository contains **step-by-step lab tasks** to practice **AWS EC2, AMI, 
 - [AMI Tasks](#ami-tasks)
 - [EBS Volumes](#ebs-volumes)
 - [Load Balancer Tasks](#load-balancer-tasks)
+- [Auto Scaling Tasks](#auto-scaling-tasks)
 - [Notes](#notes)
 
 ---
@@ -136,11 +138,33 @@ This repository contains **step-by-step lab tasks** to practice **AWS EC2, AMI, 
 
 ---
 
+## Auto Scaling Tasks
+
+- [ ] Create a **Launch Configuration** or **Launch Template**
+- [ ] Create **Auto Scaling Group (ASG)**
+  - Specify **minimum, maximum, and desired capacity**
+  - Assign **subnets** in multiple AZs
+- [ ] Attach **Load Balancer / Target Group** to ASG
+- [ ] Enable **Health Checks**
+  - EC2
+  - ELB
+- [ ] Test scaling policies:
+  - **Scale Out** → increase load → verify new instances launch
+  - **Scale In** → decrease load → verify instances terminate
+- [ ] Test instance termination:
+  - Terminate an instance manually → ASG launches a replacement
+- [ ] Verify instances in multiple AZs → ensure **high availability**
+- [ ] Cleanup: delete ASG, Launch Template/Configuration, and all instances
+
+---
+
 ## Notes
 
 - Snapshots & volumes → **tag properly**
 - Verify **shutdown behavior**
 - Elastic IP → **release after use**
 - Encrypted AMI → root EBS is encrypted, works normally
+- Auto Scaling → ensures **high availability and fault tolerance**
+- Recommended for **labs / practice / exam prep**
 
 ---
