@@ -118,6 +118,16 @@ This repository contains **step-by-step lab tasks** to practice **AWS EC2, AMI, 
 ## Load Balancer (ELB) Tasks
 
 - [ ] Launch 2 EC2 instances with **user data**
+      ```bash
+         #!/bin/bash
+         mkdir /data
+         echo "AWS AMI LAB" > /data/info.txt
+         yum install httpd -y
+         service httpd start
+         chkconfig httpd on
+         mkdir /var/www/html
+         echo "hey this is my first/second EC2 webserver" > /var/www/html/index.html
+      ```
 - [ ] Security Group:
   - Allow HTTP (80) from **My IP**
   - Keep default “all traffic” rule
