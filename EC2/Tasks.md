@@ -1,145 +1,146 @@
-# Tasks – EC2
+# AWS EC2, AMI, Volumes & Load Balancer Lab 🖥️☁️
 
-This document outlines the **end-to-end tasks involved in launching and managing EC2 instances**, including **Launch Templates** and important operational behaviors.
+[![AWS](https://img.shields.io/badge/AWS-EC2-blue?logo=amazon-aws)](https://aws.amazon.com/ec2/)
+[![Linux](https://img.shields.io/badge/Linux-red?logo=linux)](https://www.linux.org/)
+[![ELB](https://img.shields.io/badge/Load_Balancer-green)](https://aws.amazon.com/elasticloadbalancing/)
 
----
-
-## 1. Create a Key Pair
-- Create a **key pair (.pem file)**.
-- This key pair is used to securely connect to EC2 instances.
-- Download and store the `.pem` file securely (cannot be downloaded again).
+This repository contains **step-by-step lab tasks** to practice **AWS EC2, AMI, EBS Volumes, and Load Balancers**.
 
 ---
 
-## 2. Create a Security Group
-- Create a **Security Group** (acts as a virtual firewall).
-- Update **Inbound Rules** to allow required traffic:
+## Table of Contents
 
-| Protocol | Port | Use Case |
-|--------|------|----------|
-| RDP | 3389 | Windows instances |
-| SSH | 22 | Linux instances |
-| HTTP | 80 | Web traffic |
-| HTTPS | 443 | Secure web traffic |
-| MySQL | 3306 | Database access |
-
-> Security Groups are **stateful** and work at the **instance level**.
+- [EC2 Basics](#ec2-basics)
+- [AMI Tasks](#ami-tasks)
+- [EBS Volumes](#ebs-volumes)
+- [Load Balancer Tasks](#load-balancer-tasks)
+- [Notes](#notes)
 
 ---
 
-## 3. Launch a Red Hat Linux EC2 Instance
-- Choose **Red Hat Enterprise Linux (RHEL)** AMI.
-- Select instance type (example: `t2.micro`).
-- Attach:
-  - Key pair
-  - Security Group
-- Launch the instance.
-- Connect using:
-  - **PuTTY** (Windows)
-  - **MobaXterm** (Windows)
-  - **SSH** (Linux/Mac)
+## EC2 Basics
+
+- [ ] Create a **Key Pair** (.pem file)
+- [ ] Create a **Security Group** and add inbound rules:
+  - Windows RDP → `3389`
+  - Linux SSH → `22`
+  - HTTP → `80`
+  - HTTPS → `443`
+  - MySQL → `3306`
+- [ ] Launch **RedHat Linux EC2** → connect using PuTTY or MobaXterm
+- [ ] Stop & Start → observe **private & public IP changes**
+- [ ] Reboot → observe **private & public IP**
+- [ ] Allocate **Elastic IP (EIP)** → associate with EC2
+- [ ] Reboot / Stop & Start → verify public IP does **not change**
+- [ ] De-associate & release EIP (avoid billing)
+- [ ] Create **Launch Template** → launch EC2 from template → delete template
+- [ ] Explore **Shutdown Behavior**:
+  - Stop
+  - Terminate
+  - Observe differences
+- [ ] Review **Actions** options
+- [ ] Terminate EC2 instances
+- [ ] Enable shutdown behavior = stop & terminate → shutdown → observe
 
 ---
 
-## 4. Stop and Start the Instance
-- Stop the EC2 instance.
-- Start it again.
-- Observe:
-  - **Private IP** → Does NOT change
-  - **Public IP** → Changes (if Elastic IP is not used)
+## AMI Tasks
+
+### Step 1 – Prepare EC2 Instance
+
+- [ ] Launch EC2 instance
+- [ ] Create files and install software on instance
+- [ ] Verify files exist
+
+### Step 2 – AMI Creation & Copy
+
+- [ ] Create AMI from instance
+- [ ] Launch instance from AMI → verify files exist
+- [ ] Copy AMI to **another region** (Northern Virginia)
+- [ ] Encrypt AMI during copy → launch instance → verify root EBS encrypted
+- [ ] Copy encrypted AMI to same / different region
+
+### Step 3 – Snapshot Tasks
+
+- [ ] Copy snapshot to another region → verify → delete snapshot
+- [ ] Encrypt snapshot → share with another AWS account
+- [ ] Share AMI & snapshot to another account
+- [ ] Create AMI from snapshot
+- [ ] Delete snapshot → then AMI → observe result
+- [ ] Delete AMI → then snapshot → observe result
+- [ ] Delete snapshot → restore via **Recycle Bin**
+
+### Step 4 – Lifecycle & Image Builder
+
+- [ ] Data Lifecycle Manager:
+  - Check UTC time
+  - Create policy
+  - Verify snapshot creation
+  - Delete policy
+- [ ] Optional: EC2 Image Builder
+  - Create Golden AMI
+  - Delete pipeline, recipes, configs, AMIs
 
 ---
 
-## 5. Reboot the Instance
-- Reboot the EC2 instance.
-- Observe:
-  - **Private IP** → Does NOT change
-  - **Public IP** → Does NOT change
+## EBS Volumes
+
+- [ ] Launch **4 EC2 instances**:
+  - 2 in `ap-south-1a`
+  - 2 in `ap-south-1b`
+
+### Cross Task
+
+- [ ] Create additional volumes → attach to instances
+- [ ] Detach root volume from **EC2-1a** → attach to another EC2 in **same AZ** as root
+
+### Volume Management
+
+- [ ] Increase **root volume size**
+- [ ] Add **additional EBS volume** → make available to users
+- [ ] Detach & attach volumes:
+  - Root volume to another EC2 as **root**
+  - Root volume to another EC2 as **additional volume**
+- [ ] Handle **lost PEM file scenario**
+- [ ] Snapshot (Mumbai) → copy to Ireland → create volume → attach
+- [ ] Extend existing Linux volume
+- [ ] Create new additional Linux volume
+- [ ] Lifecycle Manager policy:
+  - Verify UTC snapshots
+  - Tag volumes
+  - Delete policy
+- [ ] Cleanup: terminate EC2, delete additional volumes, lifecycle policy, copied snapshots
 
 ---
 
-## 6. Allocate and Associate an Elastic IP (EIP)
-- Allocate an **Elastic IP** from AWS.
-- Associate the Elastic IP with the EC2 instance.
-- Elastic IP provides a **static public IP**.
+## Load Balancer (ELB) Tasks
+
+- [ ] Launch 2 EC2 instances with **user data**
+- [ ] Security Group:
+  - Allow HTTP (80) from **My IP**
+  - Keep default “all traffic” rule
+- [ ] Access EC2 public IP → verify website works
+- [ ] Create **Load Balancer**:
+  - Health check path: `/index.html`
+- [ ] Create **Target Group (TG)** → register targets
+- [ ] Access **ELB DNS** → verify targets healthy
+- [ ] Enable **stickiness** → test
+- [ ] Configure **path-based routing**:
+  - 4 EC2 instances:
+    - 2 → `/index.html` → TG1
+    - 2 → `/admin` → TG2
+  - Load Balancer → Listeners → Edit rules → Add path `/admin` → forward to `Admin_TG`
+- [ ] Review all **ELB & TG actions**
+- [ ] Stop one EC2 → access ELB → verify website works
+- [ ] Terminate all EC2, ELB, Target Groups
 
 ---
 
-## 7. Stop / Start or Reboot with Elastic IP
-- Stop and start the EC2 instance.
-- Reboot the instance.
-- Observe:
-  - **Public IP remains the same** (because of Elastic IP)
+## Notes
+
+- Snapshots & volumes → **tag properly**
+- Verify **shutdown behavior**
+- Elastic IP → **release after use**
+- Encrypted AMI → root EBS is encrypted, works normally
 
 ---
-
-## 8. De-associate and Release Elastic IP
-- De-associate the Elastic IP from the EC2 instance.
-- Release the Elastic IP back to AWS.
-- This avoids **unnecessary billing charges**.
-
----
-
-## 9. Launch Templates
-- Create a **Launch Template** that includes:
-  - AMI
-  - Instance type
-  - Key pair
-  - Security Group
-  - Storage configuration
-  - Tags
-- Launch EC2 instances using the **Launch Template**.
-- Verify instances are created correctly.
-- Delete the launched instances.
-- Delete the Launch Template.
-
-> Launch Templates provide **standardization**, **automation**, and **reusability**.
-
----
-
-## 10. Instance Shutdown Behavior
-- Review the **Shutdown behavior** setting:
-  - `Stop`
-  - `Terminate`
-- Shut down the instance from the OS.
-- Observe whether the instance:
-  - Stops
-  - Terminates
-- Change shutdown behavior to **Terminate**.
-- Shut down again and observe the difference.
-
----
-
-## 11. Review EC2 Actions Menu
-- Explore available options under **Actions**, such as:
-  - Instance State
-  - Image and Templates
-  - Security
-  - Networking
-  - Monitor and Troubleshoot
-  - Instance Settings
-
----
-
-## 12. Terminate EC2 Instances
-- Terminate the EC2 instances.
-- Verify:
-  - Instance is permanently deleted
-  - Root volume is deleted (default behavior)
-
----
-
-## 13. Shutdown Behavior Validation
-- Enable shutdown behavior as:
-  - **Stop**
-  - **Terminate**
-- Log in to the EC2 instance.
-- Run OS-level shutdown command.
-- Observe:
-  - Instance stops when set to **Stop**
-  - Instance terminates when set to **Terminate**
-
----
-
-- Launch Templates simplify and standardize instance creation.
-- Shutdown behavior controls what happens when OS is shut down.
