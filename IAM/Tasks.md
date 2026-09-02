@@ -56,10 +56,6 @@
 
 * **17.** Create a role and assign permissions for the following scenarios:
 
-  * EC2
-  * Lambda
-  * Switch Role
-
 * **18.** Create 2 IAM users (`test1` and `test2`).
 
   * **test1:** Assign `IAMFullAccess`.
